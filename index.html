@@ -108,8 +108,8 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(340px, 500px);
-      gap: clamp(32px, 6vw, 84px);
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 480px);
+      gap: clamp(32px, 5vw, 72px);
       align-items: center;
       padding: 120px 60px 80px;
       position: relative;
@@ -142,42 +142,67 @@
     .hero-photo {
       position: relative;
       z-index: 1;
-      width: min(38vw, 500px);
+      width: clamp(340px, 35vw, 470px);
       min-width: 320px;
       aspect-ratio: 1 / 1.08;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: center;
       opacity: 0;
       animation: fadeIn 1s 0.7s forwards;
       pointer-events: none;
       justify-self: end;
-      align-self: end;
+      align-self: center;
+      margin-top: 0;
+      transform: translateY(var(--photo-block-y));
+      --photo-block-y: clamp(-108px, -7vw, -72px);
+      --photo-frame: 84%;
+      --photo-scale: 0.88;
+      --photo-y: 1%;
     }
 
     .hero-photo::before {
       content: '';
       position: absolute;
       left: 50%;
-      bottom: 6%;
-      width: 86%;
-      height: 86%;
-      transform: translateX(-50%);
-      border: 1px solid rgba(200,169,110,0.22);
+      top: 50%;
+      width: var(--photo-frame);
+      height: var(--photo-frame);
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(200,169,110,0.28);
       border-radius: 50%;
       background:
-        radial-gradient(circle at 50% 45%, rgba(200,169,110,0.16), transparent 60%),
-        radial-gradient(circle at 50% 72%, rgba(126,184,201,0.12), transparent 56%);
-      box-shadow: 0 28px 90px rgba(0,0,0,0.34);
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,0.08), transparent 34%),
+        radial-gradient(circle at 50% 52%, rgba(200,169,110,0.18), transparent 62%),
+        radial-gradient(circle at 50% 72%, rgba(126,184,201,0.12), transparent 58%);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.34), inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: calc(var(--photo-frame) + 18px);
+      height: calc(var(--photo-frame) + 18px);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 0 0 8px rgba(200,169,110,0.035),
+        0 0 42px rgba(200,169,110,0.12);
     }
 
     .hero-photo img {
       position: relative;
+      z-index: 2;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      object-position: center bottom;
-      filter: drop-shadow(0 28px 40px rgba(0,0,0,0.38));
+      object-position: center center;
+      transform: translateY(var(--photo-y)) scale(var(--photo-scale));
+      transform-origin: center center;
+      filter: drop-shadow(0 24px 34px rgba(0,0,0,0.38));
     }
 
     .hero-tag {
@@ -1081,10 +1106,15 @@
       .hero-content { max-width: 760px; }
 
       .hero-photo {
-        width: min(72vw, 480px);
+        width: min(72vw, 420px);
         min-width: 0;
         margin: 0 auto;
         justify-self: center;
+        transform: translateY(0);
+        --photo-block-y: 0px;
+        --photo-frame: 84%;
+        --photo-scale: 0.86;
+        --photo-y: 1%;
       }
 
       .hero-scroll { display: none; }
@@ -1120,7 +1150,11 @@
       }
       .hero-content { max-width: 100%; }
       .hero-photo {
-        width: min(88vw, 420px);
+        width: min(88vw, 370px);
+        --photo-block-y: 0px;
+        --photo-frame: 84%;
+        --photo-scale: 0.86;
+        --photo-y: 1%;
       }
       .github-contribution { padding: 14px; }
       .github-contribution-head {
