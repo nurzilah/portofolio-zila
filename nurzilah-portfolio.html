@@ -1,0 +1,1698 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nurzilah Hidayati — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --border: rgba(255,255,255,0.07);
+      --accent: #c8a96e;
+      --accent2: #7eb8c9;
+      --accent3: #c97eb8;
+      --text: #e8e8f0;
+      --muted: #888898;
+      --glow: rgba(200,169,110,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      padding-bottom: 104px;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(calc(100% - 32px), 980px);
+      padding: 10px 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05)),
+        rgba(10,10,15,0.62);
+      backdrop-filter: blur(24px) saturate(155%);
+      -webkit-backdrop-filter: blur(24px) saturate(155%);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.14);
+    }
+
+    .nav-logo {
+      display: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      list-style: none;
+      width: 100%;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      border-radius: 999px;
+      transition: color 0.3s, background 0.3s, box-shadow 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 500px);
+      gap: clamp(32px, 6vw, 84px);
+      align-items: center;
+      padding: 120px 60px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(200,169,110,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(126,184,201,0.06) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-photo {
+      position: relative;
+      z-index: 1;
+      width: min(38vw, 500px);
+      min-width: 320px;
+      aspect-ratio: 1 / 1.08;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1s 0.7s forwards;
+      pointer-events: none;
+      justify-self: end;
+      align-self: end;
+    }
+
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 6%;
+      width: 86%;
+      height: 86%;
+      transform: translateX(-50%);
+      border: 1px solid rgba(200,169,110,0.22);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(200,169,110,0.16), transparent 60%),
+        radial-gradient(circle at 50% 72%, rgba(126,184,201,0.12), transparent 56%);
+      box-shadow: 0 28px 90px rgba(0,0,0,0.34);
+    }
+
+    .hero-photo img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 28px 40px rgba(0,0,0,0.38));
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: 0;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 3vw, 28px);
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+
+    .github-contribution {
+      width: min(100%, 560px);
+      margin-top: 28px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03)),
+        rgba(17,17,24,0.54);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: 0 20px 54px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.12);
+      opacity: 0;
+      animation: fadeUp 0.8s 1.15s forwards;
+    }
+
+    .github-contribution-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .github-contribution-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .github-contribution-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .github-contribution-link:hover { color: var(--accent2); }
+
+    .github-contribution img {
+      width: 100%;
+      display: block;
+      min-height: 104px;
+      object-fit: contain;
+      border-radius: 4px;
+      background: rgba(10,10,15,0.62);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      min-height: 44px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: #e0c080;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .btn-soft {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-soft:hover {
+      background: rgba(126,184,201,0.1);
+      border-color: rgba(126,184,201,0.35);
+      color: var(--accent2);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--accent));
+      animation: scrollPulse 2s infinite;
+    }
+
+    .scroll-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    /* STATUS BADGES */
+    .status-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      border: 1px solid;
+    }
+
+    .badge-green {
+      background: rgba(126,201,126,0.1);
+      border-color: rgba(126,201,126,0.3);
+      color: #7ec97e;
+    }
+
+    .badge-blue {
+      background: rgba(126,184,201,0.1);
+      border-color: rgba(126,184,201,0.3);
+      color: var(--accent2);
+    }
+
+    .badge-gold {
+      background: rgba(200,169,110,0.1);
+      border-color: rgba(200,169,110,0.3);
+      color: var(--accent);
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 2s infinite;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 64px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 60px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .edu-item {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+
+    .edu-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 28px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .edu-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      background: var(--bg);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .edu-inner-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .edu-content h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .edu-content p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ORGANIZATION */
+    .org-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .org-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 28px;
+      padding: 28px 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .org-item:hover {
+      background: #1a1a24;
+      border-color: rgba(200,169,110,0.22);
+      transform: translateY(-3px);
+    }
+
+    .org-year {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .org-content h3 {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .org-content .org-place {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .org-content ul {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .org-content li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .org-content li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .skill-card {
+      background: var(--card);
+      padding: 32px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover { background: #1a1a24; transform: translateY(-4px); }
+
+    .skill-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .skill-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* PROJECTS */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 28px 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .project-item:hover {
+      background: #1a1a24;
+      border-color: rgba(200,169,110,0.2);
+      transform: translateX(8px);
+    }
+
+    .project-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: var(--border);
+      font-style: italic;
+      font-weight: 900;
+    }
+
+    .project-info h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .project-info p {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .project-type {
+      padding: 6px 14px;
+      border-radius: 2px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .type-web {
+      background: rgba(126,184,201,0.1);
+      border: 1px solid rgba(126,184,201,0.3);
+      color: var(--accent2);
+    }
+
+    .type-app {
+      background: rgba(201,126,184,0.1);
+      border: 1px solid rgba(201,126,184,0.3);
+      color: var(--accent3);
+    }
+
+    /* CERTIFICATES */
+    .cert-tabs {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      margin: -28px 0 36px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .cert-tab {
+      border: 0;
+      border-radius: 2px;
+      padding: 10px 18px;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .cert-tab:hover {
+      color: var(--accent);
+    }
+
+    .cert-tab.active {
+      background: var(--accent);
+      color: #0a0a0f;
+      font-weight: 700;
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-item[hidden] {
+      display: none;
+    }
+
+    .cert-item {
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0;
+      transition: all 0.3s;
+      position: relative;
+      color: inherit;
+      text-decoration: none;
+      overflow: hidden;
+    }
+
+    .cert-item::after {
+      content: '✦';
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      color: var(--accent);
+      font-size: 10px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cert-item:hover {
+      background: #1a1a24;
+      transform: translateY(-3px);
+    }
+
+    .cert-item:hover::after { opacity: 1; }
+
+    .cert-platform {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cert-name {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .cert-status {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    a.cert-item:hover .cert-status {
+      color: var(--accent);
+    }
+
+    .cert-item::after {
+      content: 'Full page';
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      background: rgba(10,10,15,0.78);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 2px;
+      backdrop-filter: blur(10px);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .cert-preview {
+      aspect-ratio: 1.42 / 1;
+      background: #0f1118;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .cert-preview img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .cert-body {
+      padding: 20px 22px 22px;
+    }
+
+    .cert-more {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    .cert-more[hidden] {
+      display: none;
+    }
+
+    /* CONTACT */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .contact-left h2 em {
+      color: var(--accent);
+    }
+
+    .contact-left p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      transform: translateX(8px);
+    }
+
+    .contact-link:hover .contact-link-label { color: var(--accent); }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(200,169,110,0.1);
+      border: 1px solid rgba(200,169,110,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .contact-link-icon svg.brand-fill {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .contact-link-info {
+      flex: 1;
+    }
+
+    .contact-link-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      transition: color 0.3s;
+    }
+
+    .contact-link-value {
+      font-size: 14px;
+    }
+
+    .contact-arrow {
+      color: var(--muted);
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover .contact-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* WORK CARD */
+    .work-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 36px;
+      border-radius: 0;
+    }
+
+    .work-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .work-card .company {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .work-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    footer .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    @keyframes scrollPulse {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        min-height: auto;
+        padding-bottom: 0;
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-content { max-width: 760px; }
+
+      .hero-photo {
+        width: min(72vw, 480px);
+        min-width: 0;
+        margin: 0 auto;
+        justify-self: center;
+      }
+
+      .hero-scroll { display: none; }
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      body { padding-bottom: 112px; }
+      nav {
+        width: calc(100% - 24px);
+        bottom: 12px;
+        padding: 8px;
+        border-radius: 24px;
+      }
+      .nav-links {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a {
+        flex: 0 0 auto;
+        min-height: 36px;
+        padding: 0 12px;
+        font-size: 10px;
+      }
+      .hero, section { padding: 80px 24px; }
+      .hero {
+        padding-top: 72px;
+        padding-bottom: 0;
+        gap: 32px;
+      }
+      .hero-content { max-width: 100%; }
+      .hero-photo {
+        width: min(88vw, 420px);
+      }
+      .github-contribution { padding: 14px; }
+      .github-contribution-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 48px; }
+      .org-item { grid-template-columns: 1fr; gap: 14px; padding: 24px; }
+      .project-item { grid-template-columns: 1fr; gap: 8px; }
+      .project-num { font-size: 24px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .divider { margin: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NH — Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#organization">Organization</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certs</a></li>
+    <li><a href="https://github.com/nurzilah/" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Portfolio / Software & Mobile Development</div>
+    <h1 class="hero-title">
+      Hello, I'm
+      <span>Nurzilah Hidayati</span>
+    </h1>
+    <div class="hero-subtitle">Crafting elegant, human-centered digital experiences from Tegal, Indonesia</div>
+    <div class="status-row">
+      <span class="badge badge-green"><span class="dot"></span> Informatics Engineering</span>
+      <span class="badge badge-blue"><span class="dot"></span> Part-time at Cinepolis</span>
+      <span class="badge badge-gold"><span class="dot"></span> Open for Opportunities</span>
+    </div>
+    <p class="hero-desc">
+      Final-year Informatics Engineering student at Universitas Harkat Negeri, Tegal.
+      Experienced in building and maintaining web and mobile applications for business and social needs.
+    </p>
+    <div class="hero-links">
+      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="btn btn-soft">GitHub ↗</a>
+    </div>
+    <div class="github-contribution" aria-label="GitHub contribution graph">
+      <div class="github-contribution-head">
+        <div class="github-contribution-label">GitHub Contributions</div>
+        <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="github-contribution-link">@nurzilah</a>
+      </div>
+      <img src="https://ghchart.rshah.org/c8a96e/nurzilah" alt="GitHub contribution graph for nurzilah" loading="lazy" />
+    </div>
+  </div>
+  <div class="hero-photo" aria-hidden="true">
+    <img src="pp_linkedin-removebg-preview.png" alt="" />
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">— 01 About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Passionate about<br><em style="color:var(--accent);font-style:italic;">technology</em> & people.</h2>
+      <p>
+        I am an Informatics Engineering student with a strong passion for software development, from web and mobile applications to data science. I believe meaningful technology is not only about code, but about solutions that genuinely help people.
+      </p>
+      <p>
+        Alongside my final-year studies, I also work part-time at Cinepolis, Pacific Mall Tegal, where I continue to strengthen my communication, teamwork, and time management skills.
+      </p>
+
+      <div class="work-card" style="margin-top:32px;">
+        <div class="company">Current Work</div>
+        <h3>Cinepolis — Pacific Mall Tegal</h3>
+        <p>Part-time staff, developing interpersonal communication, customer service, and teamwork in a dynamic environment while completing my thesis.</p>
+      </div>
+
+      <div class="work-card" style="margin-top:16px;">
+        <div class="company">Internship · July – September 2025</div>
+        <h3>Mobile Developer — PT Wesclic Indonesia Neotech</h3>
+        <p>Special Region of Yogyakarta. Internship experience as a mobile developer in a professional work environment.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="transition-delay:0.2s">
+      <div class="section-label" style="margin-bottom:24px;">— Education Journey</div>
+      <div class="edu-timeline">
+        <div class="edu-item">
+          <div class="edu-dot"><div class="edu-inner-dot"></div></div>
+          <div class="edu-content">
+            <h4>Universitas Harkat Negeri, Tegal</h4>
+            <p>Informatics Engineering · 2022 – Present (8th Semester)</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-dot"><div class="edu-inner-dot"></div></div>
+          <div class="edu-content">
+            <h4>SMKS Bhakti Praja Dukuhwaru</h4>
+            <p>Graduated 2022</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-dot"><div class="edu-inner-dot"></div></div>
+          <div class="edu-content">
+            <h4>SMPN 2 Jatibarang Brebes</h4>
+            <p>Graduated 2019</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ORGANIZATION -->
+<section id="organization">
+  <div class="section-label">— Organization Experience</div>
+  <h2 class="section-title reveal">Organization<br>Experience</h2>
+  <p class="section-sub reveal">Organization roles that shaped my leadership, public communication, team collaboration, and external relations skills.</p>
+
+  <div class="org-list">
+    <div class="org-item reveal">
+      <div class="org-year">2024</div>
+      <div class="org-content">
+        <h3>Chairperson</h3>
+        <div class="org-place">Informatics Engineering Industrial Visit</div>
+        <ul>
+          <li>Led the team and ensured every activity ran smoothly.</li>
+          <li>Maintained participant comfort and satisfaction throughout the event.</li>
+          <li>Built active communication with external stakeholders.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="org-item reveal" style="transition-delay:0.1s">
+      <div class="org-year">2023–2024</div>
+      <div class="org-content">
+        <h3>Kominfo</h3>
+        <div class="org-place">HMPTI Universitas Harkat Negeri Tegal</div>
+        <ul>
+          <li>Managed organization information and public communication.</li>
+          <li>Worked in a fast-paced, goal-oriented team environment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="org-item reveal" style="transition-delay:0.2s">
+      <div class="org-year">2023</div>
+      <div class="org-content">
+        <h3>Sponsorship Team</h3>
+        <div class="org-place">PKKMB Universitas Harkat Negeri Tegal</div>
+        <ul>
+          <li>Built relationships and communicated professionally with external partners.</li>
+          <li>Maintained a friendly, respectful, and representative attitude in every interaction.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">— 02 Skills</div>
+  <h2 class="section-title reveal">Technical<br>Expertise</h2>
+  <p class="section-sub reveal">Technical skills I have developed through coursework, projects, and independent learning.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <h3>Web Development</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">Laravel</span>
+        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">MySQL</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="transition-delay:0.1s">
+      <div class="skill-icon">📱</div>
+      <h3>Mobile Development</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Android</span>
+        <span class="skill-tag">Flutter</span>
+        <span class="skill-tag">Dart</span>
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">Firebase</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="transition-delay:0.2s">
+      <div class="skill-icon">📊</div>
+      <h3>Data Science & AI</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Visualization</span>
+        <span class="skill-tag">ML Basics</span>
+        <span class="skill-tag">Gen AI</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="transition-delay:0.3s">
+      <div class="skill-icon">☁️</div>
+      <h3>Cloud & DevOps</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Cloud</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">DevOps Basics</span>
+        <span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="transition-delay:0.4s">
+      <div class="skill-icon">🔧</div>
+      <h3>Programming Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Dart</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal" style="transition-delay:0.5s">
+      <div class="skill-icon">📐</div>
+      <h3>Additional Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Project Management</span>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">SOLID Principles</span>
+        <span class="skill-tag">Financial Literacy</span>
+        <span class="skill-tag">UI/UX Basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">— 03 Projects</div>
+  <h2 class="section-title reveal">Portfolio &<br>Projects</h2>
+  <p class="section-sub reveal">Projects I have worked on, developed, and maintained from start to completion.</p>
+
+  <div class="projects-list">
+
+    <div class="project-item reveal">
+      <div class="project-num">01</div>
+      <div class="project-info">
+        <h3>SMK Asy-Syamsuriyyah School Website</h3>
+        <p>Jan 2024 – Jul 2024 · Website · Maintenance & Development</p>
+      </div>
+      <span class="project-type type-web">Website</span>
+    </div>
+
+    <div class="project-item reveal" style="transition-delay:0.1s">
+      <div class="project-num">02</div>
+      <div class="project-info">
+        <h3>SiBatikGal</h3>
+        <p>Jul 2024 – Jan 2025 · Digital Batik Platform · Tegal</p>
+      </div>
+      <span class="project-type type-web">Website</span>
+    </div>
+
+    <div class="project-item reveal" style="transition-delay:0.15s">
+      <div class="project-num">03</div>
+      <div class="project-info">
+        <h3>Therapalsy</h3>
+        <p>Jan 2025 – Jul 2025 · Digital Therapy Application</p>
+      </div>
+      <span class="project-type type-app">App</span>
+    </div>
+
+    <div class="project-item reveal" style="transition-delay:0.2s">
+      <div class="project-num">04</div>
+      <div class="project-info">
+        <h3>Fintech App</h3>
+        <p>Jul 2025 – Aug 2025 · Digital Finance Application</p>
+      </div>
+      <span class="project-type type-app">App</span>
+    </div>
+
+    <div class="project-item reveal" style="transition-delay:0.25s">
+      <div class="project-num">05</div>
+      <div class="project-info">
+        <h3>MirotaKlik</h3>
+        <p>Aug 2025 – Oct 2025 · Platform E-Commerce</p>
+      </div>
+      <span class="project-type type-app">App</span>
+    </div>
+
+    <div class="project-item reveal" style="transition-delay:0.3s">
+      <div class="project-num">06</div>
+      <div class="project-info">
+        <h3>SUMU App</h3>
+        <p>Oct 2025 – Nov 2025 · Mobile Utility Application</p>
+      </div>
+      <span class="project-type type-app">App</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="section-label">— 04 Certificates</div>
+  <h2 class="section-title reveal">Professional<br>Certifications</h2>
+  <p class="section-sub reveal">Dicoding, Huawei, and Wesclic internship certifications that reflect my continued growth across several technology fields.</p>
+
+  <div class="cert-tabs reveal" role="tablist" aria-label="Certificate category">
+    <button class="cert-tab active" type="button" data-cert-target="dicoding" role="tab" aria-selected="true">Dicoding</button>
+    <button class="cert-tab" type="button" data-cert-target="huawei" role="tab" aria-selected="false">Huawei</button>
+    <button class="cert-tab" type="button" data-cert-target="wesclic" role="tab" aria-selected="false">Wesclic</button>
+  </div>
+
+  <div class="certs-grid">
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Pengembangan%20Aplikasi%20Mobile.pdf" target="_blank" rel="noopener"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Pengembangan%20Aplikasi%20Mobile.jpg" alt="Certificate preview: Mobile Application Development Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Mobile Application Development Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar-Dasar%20DevOps.pdf" target="_blank" rel="noopener" style="transition-delay:0.05s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar-Dasar%20DevOps.jpg" alt="Certificate preview: DevOps Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">DevOps Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Google%20Cloud.pdf" target="_blank" rel="noopener" style="transition-delay:0.1s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Google%20Cloud.jpg" alt="Certificate preview: Google Cloud Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Google Cloud Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Prompt%20Engineering%20untuk%20Software%20Developer.pdf" target="_blank" rel="noopener" style="transition-delay:0.15s"><div class="cert-preview"><img src="certificates/dicoding/previews/Prompt%20Engineering%20untuk%20Software%20Developer.jpg" alt="Certificate preview: Prompt Engineering for Software Developers" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Prompt Engineering for Software Developers</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Analisis%20Data%20untuk%20Pemula.pdf" target="_blank" rel="noopener" style="transition-delay:0.2s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Analisis%20Data%20untuk%20Pemula.jpg" alt="Certificate preview: Data Analysis for Beginners" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Data Analysis for Beginners</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Visualisasi%20Data.pdf" target="_blank" rel="noopener" style="transition-delay:0.25s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Visualisasi%20Data.jpg" alt="Certificate preview: Data Visualization Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Data Visualization Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Structured%20Query%20Language%20(SQL).pdf" target="_blank" rel="noopener" style="transition-delay:0.3s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Structured%20Query%20Language%20(SQL).jpg" alt="Certificate preview: Structured Query Language (SQL) Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Structured Query Language (SQL) Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Data%20Science.pdf" target="_blank" rel="noopener" style="transition-delay:0.35s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Data%20Science.jpg" alt="Certificate preview: Data Science Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Data Science Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Memulai%20Pemrograman%20dengan%20Python.pdf" target="_blank" rel="noopener" style="transition-delay:0.4s"><div class="cert-preview"><img src="certificates/dicoding/previews/Memulai%20Pemrograman%20dengan%20Python.jpg" alt="Certificate preview: Getting Started with Python Programming" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Getting Started with Python Programming</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Cloud%20dan%20Gen%20AI%20di%20AWS.pdf" target="_blank" rel="noopener" style="transition-delay:0.45s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Cloud%20dan%20Gen%20AI%20di%20AWS.jpg" alt="Certificate preview: Cloud and Gen AI Basics on AWS" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Cloud and Gen AI Basics on AWS</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Membangun%20Aplikasi%20Gen%20AI%20dengan%20Microsoft%20Azure.pdf" target="_blank" rel="noopener" style="transition-delay:0.5s"><div class="cert-preview"><img src="certificates/dicoding/previews/Membangun%20Aplikasi%20Gen%20AI%20dengan%20Microsoft%20Azure.jpg" alt="Certificate preview: Building Gen AI Applications with Microsoft Azure" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Building Gen AI Applications with Microsoft Azure</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Penerapan%20Data%20Science%20dengan%20Microsoft%20Fabric.pdf" target="_blank" rel="noopener" style="transition-delay:0.55s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Penerapan%20Data%20Science%20dengan%20Microsoft%20Fabric.jpg" alt="Certificate preview: Applied Data Science with Microsoft Fabric" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Applied Data Science with Microsoft Fabric</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Spec-Driven%20Development%20dengan%20Kiro.pdf" target="_blank" rel="noopener" style="transition-delay:0.6s"><div class="cert-preview"><img src="certificates/dicoding/previews/Spec-Driven%20Development%20dengan%20Kiro.jpg" alt="Certificate preview: Spec-Driven Development with Kiro" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Spec-Driven Development with Kiro</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Memulai%20Pemrograman%20Dengan%20Java.pdf" target="_blank" rel="noopener" style="transition-delay:0.65s"><div class="cert-preview"><img src="certificates/dicoding/previews/Memulai%20Pemrograman%20Dengan%20Java.jpg" alt="Certificate preview: Getting Started with Java Programming" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Getting Started with Java Programming</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20AI.pdf" target="_blank" rel="noopener" style="transition-delay:0.7s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20AI.jpg" alt="Certificate preview: AI Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">AI Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Fundamental%20Analisis%20Data.pdf" target="_blank" rel="noopener" style="transition-delay:0.75s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Fundamental%20Analisis%20Data.jpg" alt="Certificate preview: Data Analysis Fundamentals" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Data Analysis Fundamentals</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Dasar%20Manajemen%20Proyek.pdf" target="_blank" rel="noopener" style="transition-delay:0.8s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Dasar%20Manajemen%20Proyek.jpg" alt="Certificate preview: Project Management Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">Project Management Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/dicoding/Belajar%20Prinsip%20Pemrograman%20SOLID.pdf" target="_blank" rel="noopener" style="transition-delay:0.85s"><div class="cert-preview"><img src="certificates/dicoding/previews/Belajar%20Prinsip%20Pemrograman%20SOLID.jpg" alt="Certificate preview: SOLID Programming Principles" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Dicoding</div><div class="cert-name">SOLID Programming Principles</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Al%20Basic%20Overview%20of%20AI(CRA%20Training%20Program).png" target="_blank" rel="noopener" style="transition-delay:0.9s"><div class="cert-preview"><img src="certificates/huawei/Al%20Basic%20Overview%20of%20AI(CRA%20Training%20Program).png" alt="Certificate preview: Al Basic Overview of AI(CRA Training Program)" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Al Basic Overview of AI(CRA Training Program)</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Artificial%20Intelligence%20Technology%20and%20Application.png" target="_blank" rel="noopener" style="transition-delay:0.95s"><div class="cert-preview"><img src="certificates/huawei/Artificial%20Intelligence%20Technology%20and%20Application.png" alt="Certificate preview: Artificial Intelligence Technology and Application" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Artificial Intelligence Technology and Application</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Computer%20Network%20Course.png" target="_blank" rel="noopener" style="transition-delay:1s"><div class="cert-preview"><img src="certificates/huawei/Computer%20Network%20Course.png" alt="Certificate preview: Computer Network Course" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Computer Network Course</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Computer%20Network.png" target="_blank" rel="noopener" style="transition-delay:1.05s"><div class="cert-preview"><img src="certificates/huawei/Computer%20Network.png" alt="Certificate preview: Computer Network" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Computer Network</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/General%20Knowledge%20of%20Computer%20Networks.png" target="_blank" rel="noopener" style="transition-delay:1.1s"><div class="cert-preview"><img src="certificates/huawei/General%20Knowledge%20of%20Computer%20Networks.png" alt="Certificate preview: General Knowledge of Computer Networks" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">General Knowledge of Computer Networks</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/HCIA-Datacom%20V1.0%20Course%20(Indonesian).png" target="_blank" rel="noopener" style="transition-delay:1.15s"><div class="cert-preview"><img src="certificates/huawei/HCIA-Datacom%20V1.0%20Course%20(Indonesian).png" alt="Certificate preview: HCIA-Datacom V1.0 Course (Indonesian)" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">HCIA-Datacom V1.0 Course (Indonesian)</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/HCIA-Security%20V4.0%20Course.png" target="_blank" rel="noopener" style="transition-delay:1.2s"><div class="cert-preview"><img src="certificates/huawei/HCIA-Security%20V4.0%20Course.png" alt="Certificate preview: HCIA-Security V4.0 Course" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">HCIA-Security V4.0 Course</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Overview%20of%20AI.png" target="_blank" rel="noopener" style="transition-delay:1.25s"><div class="cert-preview"><img src="certificates/huawei/Overview%20of%20AI.png" alt="Certificate preview: Overview of AI" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Overview of AI</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Python%20Programming%20Basics.png" target="_blank" rel="noopener" style="transition-delay:1.3s"><div class="cert-preview"><img src="certificates/huawei/Python%20Programming%20Basics.png" alt="Certificate preview: Python Programming Basics" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Python Programming Basics</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Search%20and%20AI%20(French).png" target="_blank" rel="noopener" style="transition-delay:1.35s"><div class="cert-preview"><img src="certificates/huawei/Search%20and%20AI%20(French).png" alt="Certificate preview: Search and AI (French)" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Search and AI (French)</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Search%20and%20AI(CRA%20Training%20Program).png" target="_blank" rel="noopener" style="transition-delay:1.4s"><div class="cert-preview"><img src="certificates/huawei/Search%20and%20AI(CRA%20Training%20Program).png" alt="Certificate preview: Search and AI(CRA Training Program)" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Search and AI(CRA Training Program)</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/Search%20and%20AI.png" target="_blank" rel="noopener" style="transition-delay:1.45s"><div class="cert-preview"><img src="certificates/huawei/Search%20and%20AI.png" alt="Certificate preview: Search and AI" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">Search and AI</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/huawei/The%20Basics%20of%20NoSQL%20and%20NewSQL%20Big%20Data%20Management%20Mechanism.png" target="_blank" rel="noopener" style="transition-delay:1.5s"><div class="cert-preview"><img src="certificates/huawei/The%20Basics%20of%20NoSQL%20and%20NewSQL%20Big%20Data%20Management%20Mechanism.png" alt="Certificate preview: The Basics of NoSQL and NewSQL Big Data Management Mechanism" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Huawei</div><div class="cert-name">The Basics of NoSQL and NewSQL Big Data Management Mechanism</div><span class="cert-status">Open full page</span></div></a>
+    <a class="cert-item reveal" href="certificates/wesclic/Nurzilah%20Hidayati%20-%20Sertifikat%20Wesclic.pdf" target="_blank" rel="noopener"><div class="cert-preview"><img src="certificates/wesclic/previews/Nurzilah%20Hidayati%20-%20Sertifikat%20Wesclic.jpg" alt="Certificate preview: internship Wesclic" loading="lazy"></div><div class="cert-body"><div class="cert-platform">Wesclic</div><div class="cert-name">The Winners Internship Program Batch 16</div><span class="cert-status">Open full page</span></div></a>
+  </div>
+
+  <div class="cert-more reveal">
+    <button class="btn btn-ghost" type="button" id="certSeeMore">See More</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:1200px;">
+  <div class="contact-wrapper">
+    <div class="contact-left reveal">
+      <div class="section-label">— 05 Contact</div>
+      <h2>Let's<br><em>connect</em> &<br>collaborate.</h2>
+      <p>Interested in collaborating or simply getting in touch? I am always open to new conversations, work opportunities, and meaningful projects.</p>
+      <a href="mailto:nurzilah.hyt@gmail.com" class="btn btn-primary">Send Email ↗</a>
+    </div>
+
+    <div class="contact-links reveal" style="transition-delay:0.2s">
+      <a href="https://www.linkedin.com/in/nurzilah-hidayati/?locale=en" target="_blank" class="contact-link">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect width="4" height="12" x="2" y="9"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">Nurzilah Hidayati</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://instagram.com/n.rzilaaa" target="_blank" class="contact-link">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect width="18" height="18" x="3" y="3" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="1"></circle>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Instagram</div>
+          <div class="contact-link-value">@n.rzilaaa</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://www.facebook.com/nurzilah.hidayati.5" target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg class="brand-fill" viewBox="0 0 24 24">
+            <path d="M14 8h3V4h-3c-3.1 0-5 1.9-5 5v3H6v4h3v4h4v-4h3.2l.8-4h-4V9c0-.7.3-1 1-1z"></path>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Facebook</div>
+          <div class="contact-link-value">facebook.com/nurzilah.hidayati.5</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.4-2.6-1.3-3.5.1-.4.5-1.8-.1-3.5 0 0-1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.4 1.7 5.4 2 5.4 2c-.6 1.7-.2 3.1-.1 3.5A5 5 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.2-.8 2-1.8.8-3.2.3-4.2-1-.3-.5-.9-.9-1.5-.9 0 0-1 0-.1.6.7.3 1.2 1 1.5 1.7.6 1.7 2.4 2.3 4.3 1.7V22"></path>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-value">github.com/nurzilah</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <a href="mailto:nurzilah.hyt@gmail.com" class="contact-link">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.9 5.7a2 2 0 0 1-2.2 0L2 7"></path>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">nurzilah.hyt@gmail.com</div>
+        </div>
+        <span class="contact-arrow">→</span>
+      </a>
+
+      <div class="contact-link" style="cursor:default;">
+        <div class="contact-link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Location</div>
+          <div class="contact-link-value">Tegal, Central Java, Indonesia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span class="footer-name">Nurzilah Hidayati</span></p>
+  <p>Built with passion · Tegal, Indonesia ✦</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Certificate category tabs
+  const certTabs = document.querySelectorAll('.cert-tab');
+  const certItems = document.querySelectorAll('.cert-item');
+  const certSeeMore = document.getElementById('certSeeMore');
+  const certLimit = 3;
+  let activeCertType = 'dicoding';
+  let certExpanded = false;
+
+  function getCertGroup(item) {
+    const href = item.getAttribute('href') || '';
+    return href.includes('/huawei/') ? 'huawei' : href.includes('/wesclic/') ? 'wesclic' : 'dicoding';
+  }
+
+  function showCertificates(type) {
+    activeCertType = type;
+    certTabs.forEach(tab => {
+      const active = tab.dataset.certTarget === type;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+
+    let visibleCount = 0;
+    let totalCount = 0;
+
+    certItems.forEach(item => {
+      const group = getCertGroup(item);
+      const inActiveGroup = group === type;
+      if (inActiveGroup) totalCount += 1;
+
+      const shouldShow = inActiveGroup && (certExpanded || visibleCount < certLimit);
+      item.hidden = !shouldShow;
+      if (shouldShow) {
+        visibleCount += 1;
+        item.classList.add('visible');
+      }
+    });
+
+    const hasMore = totalCount > certLimit;
+    certSeeMore.parentElement.hidden = !hasMore;
+    certSeeMore.textContent = certExpanded ? 'Show Less' : 'See More';
+  }
+
+  certTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      certExpanded = false;
+      showCertificates(tab.dataset.certTarget);
+    });
+  });
+
+  certSeeMore.addEventListener('click', () => {
+    certExpanded = !certExpanded;
+    showCertificates(activeCertType);
+  });
+
+  showCertificates('dicoding');
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
