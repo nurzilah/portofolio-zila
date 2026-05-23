@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nurzilah Hidayati — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --card: #16161f;
-      --border: rgba(255,255,255,0.07);
-      --accent: #c8a96e;
-      --accent2: #7eb8c9;
-      --accent3: #c97eb8;
-      --text: #e8e8f0;
-      --muted: #888898;
-      --glow: rgba(200,169,110,0.15);
+      --bg: #f6fbff;
+      --surface: #ffffff;
+      --card: #ffffff;
+      --border: rgba(32,43,64,0.12);
+      --accent: #ff7a59;
+      --accent2: #18b7a4;
+      --accent3: #4f7cff;
+      --text: #182235;
+      --muted: #66738a;
+      --glow: rgba(255,122,89,0.18);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,6 +43,43 @@
       opacity: 0.4;
     }
 
+    .language-switch {
+      position: fixed;
+      top: 22px;
+      right: 24px;
+      z-index: 120;
+      display: inline-flex;
+      gap: 4px;
+      padding: 5px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.86);
+      box-shadow: 0 14px 36px rgba(42,55,86,0.12);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+    }
+
+    .language-switch button {
+      min-width: 42px;
+      min-height: 32px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+
+    .language-switch button.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 8px 18px rgba(255,122,89,0.22);
+    }
+
     /* NAV */
     nav {
       position: fixed;
@@ -57,7 +94,7 @@
       align-items: center;
       background:
         linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05)),
-        rgba(10,10,15,0.62);
+        rgba(255,255,255,0.84);
       backdrop-filter: blur(24px) saturate(155%);
       -webkit-backdrop-filter: blur(24px) saturate(155%);
       border: 1px solid rgba(255,255,255,0.16);
@@ -67,7 +104,7 @@
 
     .nav-logo {
       display: none;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       color: var(--accent);
       letter-spacing: 2px;
@@ -88,7 +125,7 @@
       justify-content: center;
       min-height: 38px;
       padding: 0 14px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       color: var(--muted);
       text-decoration: none;
@@ -120,8 +157,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(200,169,110,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(126,184,201,0.06) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(255,122,89,0.18) 0%, transparent 62%),
+        radial-gradient(ellipse 42% 42% at 18% 82%, rgba(24,183,164,0.14) 0%, transparent 64%),
+        linear-gradient(180deg, #ffffff 0%, #f6fbff 72%, #eef7ff 100%);
     }
 
     .hero-grid {
@@ -142,9 +180,9 @@
     .hero-photo {
       position: relative;
       z-index: 1;
-      width: clamp(340px, 35vw, 470px);
+      width: clamp(320px, 33vw, 440px);
       min-width: 320px;
-      aspect-ratio: 1 / 1.08;
+      aspect-ratio: 1 / 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -155,10 +193,10 @@
       align-self: center;
       margin-top: 0;
       transform: translateY(var(--photo-block-y));
-      --photo-block-y: clamp(-108px, -7vw, -72px);
-      --photo-frame: 84%;
-      --photo-scale: 0.88;
-      --photo-y: 1%;
+      --photo-block-y: clamp(-84px, -5vw, -48px);
+      --photo-frame: 92%;
+      --photo-scale: 0.78;
+      --photo-y: 5%;
     }
 
     .hero-photo::before {
@@ -169,12 +207,12 @@
       width: var(--photo-frame);
       height: var(--photo-frame);
       transform: translate(-50%, -50%);
-      border: 1px solid rgba(200,169,110,0.28);
+      border: 1px solid rgba(255,122,89,0.28);
       border-radius: 50%;
       background:
         radial-gradient(circle at 50% 42%, rgba(255,255,255,0.08), transparent 34%),
-        radial-gradient(circle at 50% 52%, rgba(200,169,110,0.18), transparent 62%),
-        radial-gradient(circle at 50% 72%, rgba(126,184,201,0.12), transparent 58%);
+        radial-gradient(circle at 50% 52%, rgba(255,122,89,0.18), transparent 62%),
+        radial-gradient(circle at 50% 72%, rgba(24,183,164,0.12), transparent 58%);
       box-shadow: 0 26px 70px rgba(0,0,0,0.34), inset 0 0 0 1px rgba(255,255,255,0.08);
     }
 
@@ -189,8 +227,8 @@
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow:
-        0 0 0 8px rgba(200,169,110,0.035),
-        0 0 42px rgba(200,169,110,0.12);
+        0 0 0 8px rgba(255,122,89,0.05),
+        0 0 42px rgba(255,122,89,0.14);
     }
 
     .hero-photo img {
@@ -206,7 +244,7 @@
     }
 
     .hero-tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 13px;
       letter-spacing: 1.5px;
       color: var(--accent);
@@ -264,11 +302,11 @@
       width: min(100%, 560px);
       margin-top: 28px;
       padding: 18px;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid var(--border);
       border-radius: 8px;
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03)),
-        rgba(17,17,24,0.54);
+        linear-gradient(135deg, rgba(255,255,255,0.94), rgba(238,247,255,0.82)),
+        var(--surface);
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
       box-shadow: 0 20px 54px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.12);
@@ -285,7 +323,7 @@
     }
 
     .github-contribution-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 2px;
       color: var(--accent);
@@ -293,7 +331,7 @@
     }
 
     .github-contribution-link {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 1px;
       color: var(--muted);
@@ -309,7 +347,7 @@
       min-height: 104px;
       object-fit: contain;
       border-radius: 4px;
-      background: rgba(10,10,15,0.62);
+      background: #ffffff;
     }
 
     .btn {
@@ -317,7 +355,7 @@
       align-items: center;
       gap: 8px;
       padding: 12px 28px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -331,12 +369,12 @@
 
     .btn-primary {
       background: var(--accent);
-      color: #0a0a0f;
+      color: #ffffff;
       font-weight: 700;
     }
 
     .btn-primary:hover {
-      background: #e0c080;
+      background: #ff8f73;
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(200,169,110,0.3);
     }
@@ -387,7 +425,7 @@
     }
 
     .scroll-text {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 9px;
       letter-spacing: 3px;
       color: var(--muted);
@@ -411,7 +449,7 @@
       gap: 6px;
       padding: 5px 14px;
       border-radius: 100px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 1px;
       border: 1px solid;
@@ -450,7 +488,7 @@
     }
 
     .section-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 4px;
       color: var(--accent);
@@ -547,7 +585,7 @@
     }
 
     .edu-content p {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       color: var(--muted);
     }
@@ -569,13 +607,13 @@
     }
 
     .org-item:hover {
-      background: #1a1a24;
-      border-color: rgba(200,169,110,0.22);
+      background: #fff8f5;
+      border-color: rgba(255,122,89,0.28);
       transform: translateY(-3px);
     }
 
     .org-year {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       letter-spacing: 2px;
       color: var(--accent);
@@ -589,7 +627,7 @@
     }
 
     .org-content .org-place {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 1px;
       color: var(--muted);
@@ -650,11 +688,21 @@
     }
 
     .skill-card:hover::before { transform: scaleX(1); }
-    .skill-card:hover { background: #1a1a24; transform: translateY(-4px); }
+    .skill-card:hover { background: #fff8f5; transform: translateY(-4px); }
 
     .skill-icon {
-      font-size: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 32px;
       margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(24,183,164,0.12);
+      color: var(--accent2);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .skill-card h3 {
@@ -671,10 +719,10 @@
 
     .skill-tag {
       padding: 4px 10px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(79,124,255,0.08);
       border: 1px solid var(--border);
       border-radius: 2px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       color: var(--muted);
       transition: all 0.2s;
@@ -705,8 +753,8 @@
     }
 
     .project-item:hover {
-      background: #1a1a24;
-      border-color: rgba(200,169,110,0.2);
+      background: #fff8f5;
+      border-color: rgba(255,122,89,0.28);
       transform: translateX(8px);
     }
 
@@ -726,7 +774,7 @@
     }
 
     .project-info p {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       color: var(--muted);
       letter-spacing: 1px;
@@ -735,7 +783,7 @@
     .project-type {
       padding: 6px 14px;
       border-radius: 2px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -770,7 +818,7 @@
       padding: 10px 18px;
       background: transparent;
       color: var(--muted);
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -784,7 +832,7 @@
 
     .cert-tab.active {
       background: var(--accent);
-      color: #0a0a0f;
+      color: #ffffff;
       font-weight: 700;
     }
 
@@ -811,7 +859,7 @@
     }
 
     .cert-item::after {
-      content: '✦';
+      content: '?';
       position: absolute;
       top: 16px;
       right: 20px;
@@ -822,14 +870,14 @@
     }
 
     .cert-item:hover {
-      background: #1a1a24;
+      background: #fff8f5;
       transform: translateY(-3px);
     }
 
     .cert-item:hover::after { opacity: 1; }
 
     .cert-platform {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 9px;
       letter-spacing: 2px;
       color: var(--accent);
@@ -847,7 +895,7 @@
       display: inline-flex;
       align-items: center;
       margin-top: 16px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 9px;
       letter-spacing: 1.5px;
       color: var(--muted);
@@ -859,15 +907,15 @@
     }
 
     .cert-item::after {
-      content: 'Full page';
+      content: attr(data-badge);
       top: 14px;
       right: 14px;
       padding: 6px 10px;
-      background: rgba(10,10,15,0.78);
-      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.86);
+      border: 1px solid var(--border);
       border-radius: 2px;
       backdrop-filter: blur(10px);
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 9px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -875,7 +923,7 @@
 
     .cert-preview {
       aspect-ratio: 1.42 / 1;
-      background: #0f1118;
+      background: #eef7ff;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
     }
@@ -985,7 +1033,7 @@
     }
 
     .contact-link-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 10px;
       letter-spacing: 2px;
       color: var(--muted);
@@ -1024,7 +1072,7 @@
     }
 
     .work-card .company {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       color: var(--accent);
       letter-spacing: 2px;
@@ -1048,7 +1096,7 @@
     }
 
     footer p {
-      font-family: 'Space Mono', monospace;
+      font-family: 'DM Sans', sans-serif;
       font-size: 11px;
       color: var(--muted);
       letter-spacing: 1px;
@@ -1112,9 +1160,9 @@
         justify-self: center;
         transform: translateY(0);
         --photo-block-y: 0px;
-        --photo-frame: 84%;
-        --photo-scale: 0.86;
-        --photo-y: 1%;
+        --photo-frame: 92%;
+        --photo-scale: 0.78;
+        --photo-y: 5%;
       }
 
       .hero-scroll { display: none; }
@@ -1148,13 +1196,17 @@
         padding-bottom: 0;
         gap: 32px;
       }
+      .language-switch {
+        top: 14px;
+        right: 16px;
+      }
       .hero-content { max-width: 100%; }
       .hero-photo {
-        width: min(88vw, 370px);
+        width: min(86vw, 340px);
         --photo-block-y: 0px;
-        --photo-frame: 84%;
-        --photo-scale: 0.86;
-        --photo-y: 1%;
+        --photo-frame: 92%;
+        --photo-scale: 0.78;
+        --photo-y: 5%;
       }
       .github-contribution { padding: 14px; }
       .github-contribution-head {
@@ -1173,16 +1225,21 @@
 </head>
 <body>
 
+<div class="language-switch" role="group" aria-label="Language selection">
+  <button type="button" class="active" data-lang-option="en" aria-pressed="true">EN</button>
+  <button type="button" data-lang-option="id" aria-pressed="false">ID</button>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">NH — Portfolio</div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#organization">Organization</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certificates">Certs</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-en="About" data-id="Tentang">About</a></li>
+    <li><a href="#organization" data-en="Organization" data-id="Organisasi">Organization</a></li>
+    <li><a href="#skills" data-en="Skills" data-id="Keahlian">Skills</a></li>
+    <li><a href="#projects" data-en="Projects" data-id="Proyek">Projects</a></li>
+    <li><a href="#certificates" data-en="Certificates" data-id="Sertifikat">Certificates</a></li>
+    <li><a href="#contact" data-en="Contact" data-id="Kontak">Contact</a></li>
   </ul>
 </nav>
 
@@ -1191,39 +1248,39 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-tag">Portfolio / Software & Mobile Development</div>
+    <div class="hero-tag" data-en="Portfolio / Software & Mobile Development" data-id="Portofolio / Pengembangan Software & Mobile">Portfolio / Software & Mobile Development</div>
     <h1 class="hero-title">
-      Hello, I'm
+      <span data-en="Hello, I'm" data-id="Halo, saya" style="display:block;color:inherit;font-style:normal;">Hello, I'm</span>
       <span>Nurzilah Hidayati</span>
     </h1>
-    <div class="hero-subtitle">Crafting elegant, human-centered digital experiences from Tegal, Indonesia</div>
+    <div class="hero-subtitle" data-en="Crafting elegant, human-centered digital experiences from Tegal, Indonesia" data-id="Membangun pengalaman digital yang elegan dan berpusat pada pengguna dari Tegal, Indonesia">Crafting elegant, human-centered digital experiences from Tegal, Indonesia</div>
     <div class="status-row">
-      <span class="badge badge-green"><span class="dot"></span> Informatics Engineering</span>
-      <span class="badge badge-blue"><span class="dot"></span> Part-time at Cinepolis</span>
-      <span class="badge badge-gold"><span class="dot"></span> Open for Opportunities</span>
+      <span class="badge badge-green"><span class="dot"></span> <span data-en="Informatics Engineering" data-id="Teknik Informatika">Informatics Engineering</span></span>
+      <span class="badge badge-blue"><span class="dot"></span> <span data-en="Part-time at Cinepolis" data-id="Part-time di Cinepolis">Part-time at Cinepolis</span></span>
+      <span class="badge badge-gold"><span class="dot"></span> <span data-en="Open for Opportunities" data-id="Terbuka untuk Peluang">Open for Opportunities</span></span>
     </div>
-    <p class="hero-desc">
+    <p class="hero-desc" data-en="Final-year Informatics Engineering student at Universitas Harkat Negeri, Tegal. Experienced in building and maintaining web and mobile applications for business and social needs." data-id="Mahasiswa tingkat akhir Teknik Informatika di Universitas Harkat Negeri, Tegal. Berpengalaman membangun dan mengelola aplikasi web maupun mobile untuk kebutuhan bisnis dan sosial.">
       Final-year Informatics Engineering student at Universitas Harkat Negeri, Tegal.
       Experienced in building and maintaining web and mobile applications for business and social needs.
     </p>
     <div class="hero-links">
-      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
-      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-      <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="btn btn-soft">GitHub ↗</a>
+      <a href="#projects" class="btn btn-primary" data-en="View Projects" data-id="Lihat Proyek">View Projects</a>
+      <a href="#contact" class="btn btn-ghost" data-en="Get in Touch" data-id="Hubungi Saya">Get in Touch</a>
+      <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="btn btn-soft">GitHub</a>
     </div>
     <div class="github-contribution" aria-label="GitHub contribution graph">
       <div class="github-contribution-head">
-        <div class="github-contribution-label">GitHub Contributions</div>
+        <div class="github-contribution-label" data-en="GitHub Contributions" data-id="Kontribusi GitHub">GitHub Contributions</div>
         <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="github-contribution-link">@nurzilah</a>
       </div>
-      <img src="https://ghchart.rshah.org/c8a96e/nurzilah" alt="GitHub contribution graph for nurzilah" loading="lazy" />
+      <img src="https://ghchart.rshah.org/ff7a59/nurzilah" alt="GitHub contribution graph for nurzilah" loading="lazy" />
     </div>
   </div>
   <div class="hero-photo" aria-hidden="true">
     <img src="pp_linkedin-removebg-preview.png" alt="" />
   </div>
   <div class="hero-scroll">
-    <span class="scroll-text">Scroll</span>
+    <span class="scroll-text" data-en="Scroll" data-id="Gulir">Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </div>
@@ -1232,52 +1289,45 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-label">— 01 About</div>
+  <div class="section-label" data-en="- 01 About" data-id="- 01 Tentang">- 01 About</div>
   <div class="about-grid">
     <div class="about-text reveal">
-      <h2 class="section-title">Passionate about<br><em style="color:var(--accent);font-style:italic;">technology</em> & people.</h2>
-      <p>
+      <h2 class="section-title" data-en="Passionate about&lt;br&gt;&lt;em style=&quot;color:var(--accent);font-style:italic;&quot;&gt;technology&lt;/em&gt; &amp; people." data-id="Tertarik pada&lt;br&gt;&lt;em style=&quot;color:var(--accent);font-style:italic;&quot;&gt;teknologi&lt;/em&gt; &amp; manusia.">Passionate about<br><em style="color:var(--accent);font-style:italic;">technology</em> & people.</h2>
+      <p data-en="I am an Informatics Engineering student with a strong passion for software development, from web and mobile applications to data science. I believe meaningful technology is not only about code, but about solutions that genuinely help people." data-id="Saya adalah mahasiswa Teknik Informatika dengan minat kuat pada pengembangan perangkat lunak, mulai dari aplikasi web dan mobile hingga data science. Saya percaya teknologi yang bermakna bukan hanya soal kode, tetapi solusi yang benar-benar membantu orang.">
         I am an Informatics Engineering student with a strong passion for software development, from web and mobile applications to data science. I believe meaningful technology is not only about code, but about solutions that genuinely help people.
       </p>
-      <p>
+      <p data-en="Alongside my final-year studies, I also work part-time at Cinepolis, Pacific Mall Tegal, where I continue to strengthen my communication, teamwork, and time management skills." data-id="Di sela studi tingkat akhir, saya juga bekerja part-time di Cinepolis, Pacific Mall Tegal, sambil terus mengasah kemampuan komunikasi, kerja sama tim, dan manajemen waktu.">
         Alongside my final-year studies, I also work part-time at Cinepolis, Pacific Mall Tegal, where I continue to strengthen my communication, teamwork, and time management skills.
       </p>
 
       <div class="work-card" style="margin-top:32px;">
-        <div class="company">Current Work</div>
+        <div class="company" data-en="Current Work" data-id="Pekerjaan Saat Ini">Current Work</div>
         <h3>Cinepolis — Pacific Mall Tegal</h3>
-        <p>Part-time staff, developing interpersonal communication, customer service, and teamwork in a dynamic environment while completing my thesis.</p>
+        <p data-en="Part-time staff, developing interpersonal communication, customer service, and teamwork in a dynamic environment while completing my thesis." data-id="Staff part-time yang mengembangkan komunikasi interpersonal, layanan pelanggan, dan kerja sama tim di lingkungan dinamis sambil menyelesaikan skripsi.">Part-time staff, developing interpersonal communication, customer service, and teamwork in a dynamic environment while completing my thesis.</p>
       </div>
 
       <div class="work-card" style="margin-top:16px;">
-        <div class="company">Internship · July – September 2025</div>
+        <div class="company" data-en="Internship · July - September 2025" data-id="Magang · Juli - September 2025">Internship · July - September 2025</div>
         <h3>Mobile Developer — PT Wesclic Indonesia Neotech</h3>
-        <p>Special Region of Yogyakarta. Internship experience as a mobile developer in a professional work environment.</p>
+        <p data-en="Special Region of Yogyakarta. Internship experience as a mobile developer in a professional work environment." data-id="Daerah Istimewa Yogyakarta. Pengalaman magang sebagai mobile developer di lingkungan kerja profesional.">Special Region of Yogyakarta. Internship experience as a mobile developer in a professional work environment.</p>
       </div>
     </div>
 
     <div class="reveal" style="transition-delay:0.2s">
-      <div class="section-label" style="margin-bottom:24px;">— Education Journey</div>
+      <div class="section-label" style="margin-bottom:24px;" data-en="- Education Journey" data-id="- Riwayat Pendidikan">- Education Journey</div>
       <div class="edu-timeline">
         <div class="edu-item">
           <div class="edu-dot"><div class="edu-inner-dot"></div></div>
           <div class="edu-content">
             <h4>Universitas Harkat Negeri, Tegal</h4>
-            <p>Informatics Engineering · 2022 – Present (8th Semester)</p>
+            <p data-en="Informatics Engineering · 2022 - Present (8th Semester)" data-id="Teknik Informatika · 2022 - Sekarang (Semester 8)">Informatics Engineering · 2022 - Present (8th Semester)</p>
           </div>
         </div>
         <div class="edu-item">
           <div class="edu-dot"><div class="edu-inner-dot"></div></div>
           <div class="edu-content">
             <h4>SMKS Bhakti Praja Dukuhwaru</h4>
-            <p>Graduated 2022</p>
-          </div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-dot"><div class="edu-inner-dot"></div></div>
-          <div class="edu-content">
-            <h4>SMPN 2 Jatibarang Brebes</h4>
-            <p>Graduated 2019</p>
+            <p data-en="Graduated 2022" data-id="Lulus 2022">Graduated 2022</p>
           </div>
         </div>
       </div>
@@ -1289,20 +1339,20 @@
 
 <!-- ORGANIZATION -->
 <section id="organization">
-  <div class="section-label">— Organization Experience</div>
-  <h2 class="section-title reveal">Organization<br>Experience</h2>
-  <p class="section-sub reveal">Organization roles that shaped my leadership, public communication, team collaboration, and external relations skills.</p>
+  <div class="section-label" data-en="- Organization Experience" data-id="- Pengalaman Organisasi">- Organization Experience</div>
+  <h2 class="section-title reveal" data-en="Organization&lt;br&gt;Experience" data-id="Pengalaman&lt;br&gt;Organisasi">Organization<br>Experience</h2>
+  <p class="section-sub reveal" data-en="Organization roles that shaped my leadership, public communication, team collaboration, and external relations skills." data-id="Peran organisasi yang membentuk kemampuan kepemimpinan, komunikasi publik, kolaborasi tim, dan relasi eksternal saya.">Organization roles that shaped my leadership, public communication, team collaboration, and external relations skills.</p>
 
   <div class="org-list">
     <div class="org-item reveal">
       <div class="org-year">2024</div>
       <div class="org-content">
-        <h3>Chairperson</h3>
-        <div class="org-place">Informatics Engineering Industrial Visit</div>
+        <h3 data-en="Chairperson" data-id="Ketua Pelaksana">Chairperson</h3>
+        <div class="org-place" data-en="Informatics Engineering Industrial Visit" data-id="Industrial Visit Teknik Informatika">Informatics Engineering Industrial Visit</div>
         <ul>
-          <li>Led the team and ensured every activity ran smoothly.</li>
-          <li>Maintained participant comfort and satisfaction throughout the event.</li>
-          <li>Built active communication with external stakeholders.</li>
+          <li data-en="Led the team and ensured every activity ran smoothly." data-id="Memimpin tim dan memastikan setiap kegiatan berjalan lancar.">Led the team and ensured every activity ran smoothly.</li>
+          <li data-en="Maintained participant comfort and satisfaction throughout the event." data-id="Menjaga kenyamanan dan kepuasan peserta selama acara.">Maintained participant comfort and satisfaction throughout the event.</li>
+          <li data-en="Built active communication with external stakeholders." data-id="Membangun komunikasi aktif dengan pihak eksternal.">Built active communication with external stakeholders.</li>
         </ul>
       </div>
     </div>
@@ -1313,8 +1363,8 @@
         <h3>Kominfo</h3>
         <div class="org-place">HMPTI Universitas Harkat Negeri Tegal</div>
         <ul>
-          <li>Managed organization information and public communication.</li>
-          <li>Worked in a fast-paced, goal-oriented team environment.</li>
+          <li data-en="Managed organization information and public communication." data-id="Mengelola informasi organisasi dan komunikasi publik.">Managed organization information and public communication.</li>
+          <li data-en="Worked in a fast-paced, goal-oriented team environment." data-id="Bekerja dalam tim yang cepat dan berorientasi pada tujuan.">Worked in a fast-paced, goal-oriented team environment.</li>
         </ul>
       </div>
     </div>
@@ -1322,11 +1372,11 @@
     <div class="org-item reveal" style="transition-delay:0.2s">
       <div class="org-year">2023</div>
       <div class="org-content">
-        <h3>Sponsorship Team</h3>
+        <h3 data-en="Sponsorship Team" data-id="Tim Sponsorship">Sponsorship Team</h3>
         <div class="org-place">PKKMB Universitas Harkat Negeri Tegal</div>
         <ul>
-          <li>Built relationships and communicated professionally with external partners.</li>
-          <li>Maintained a friendly, respectful, and representative attitude in every interaction.</li>
+          <li data-en="Built relationships and communicated professionally with external partners." data-id="Membangun relasi dan berkomunikasi secara profesional dengan mitra eksternal.">Built relationships and communicated professionally with external partners.</li>
+          <li data-en="Maintained a friendly, respectful, and representative attitude in every interaction." data-id="Menjaga sikap ramah, sopan, dan representatif dalam setiap interaksi.">Maintained a friendly, respectful, and representative attitude in every interaction.</li>
         </ul>
       </div>
     </div>
@@ -1337,14 +1387,14 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">— 02 Skills</div>
-  <h2 class="section-title reveal">Technical<br>Expertise</h2>
-  <p class="section-sub reveal">Technical skills I have developed through coursework, projects, and independent learning.</p>
+  <div class="section-label" data-en="- 02 Skills" data-id="- 02 Keahlian">- 02 Skills</div>
+  <h2 class="section-title reveal" data-en="Technical&lt;br&gt;Expertise" data-id="Keahlian&lt;br&gt;Teknis">Technical<br>Expertise</h2>
+  <p class="section-sub reveal" data-en="Technical skills I have developed through coursework, projects, and independent learning." data-id="Keahlian teknis yang saya kembangkan melalui perkuliahan, proyek, dan pembelajaran mandiri.">Technical skills I have developed through coursework, projects, and independent learning.</p>
 
   <div class="skills-grid">
     <div class="skill-card reveal">
-      <div class="skill-icon">🌐</div>
-      <h3>Web Development</h3>
+      <div class="skill-icon">WEB</div>
+      <h3 data-en="Web Development" data-id="Pengembangan Web">Web Development</h3>
       <div class="skill-tags">
         <span class="skill-tag">HTML/CSS</span>
         <span class="skill-tag">JavaScript</span>
@@ -1356,8 +1406,8 @@
     </div>
 
     <div class="skill-card reveal" style="transition-delay:0.1s">
-      <div class="skill-icon">📱</div>
-      <h3>Mobile Development</h3>
+      <div class="skill-icon">APP</div>
+      <h3 data-en="Mobile Development" data-id="Pengembangan Mobile">Mobile Development</h3>
       <div class="skill-tags">
         <span class="skill-tag">Android</span>
         <span class="skill-tag">Flutter</span>
@@ -1368,8 +1418,8 @@
     </div>
 
     <div class="skill-card reveal" style="transition-delay:0.2s">
-      <div class="skill-icon">📊</div>
-      <h3>Data Science & AI</h3>
+      <div class="skill-icon">DATA</div>
+      <h3 data-en="Data Science & AI" data-id="Data Science & AI">Data Science & AI</h3>
       <div class="skill-tags">
         <span class="skill-tag">Python</span>
         <span class="skill-tag">Data Analysis</span>
@@ -1381,8 +1431,8 @@
     </div>
 
     <div class="skill-card reveal" style="transition-delay:0.3s">
-      <div class="skill-icon">☁️</div>
-      <h3>Cloud & DevOps</h3>
+      <div class="skill-icon">OPS</div>
+      <h3 data-en="Cloud & DevOps" data-id="Cloud & DevOps">Cloud & DevOps</h3>
       <div class="skill-tags">
         <span class="skill-tag">Google Cloud</span>
         <span class="skill-tag">AWS</span>
@@ -1393,8 +1443,8 @@
     </div>
 
     <div class="skill-card reveal" style="transition-delay:0.4s">
-      <div class="skill-icon">🔧</div>
-      <h3>Programming Languages</h3>
+      <div class="skill-icon">CODE</div>
+      <h3 data-en="Programming Languages" data-id="Bahasa Pemrograman">Programming Languages</h3>
       <div class="skill-tags">
         <span class="skill-tag">Python</span>
         <span class="skill-tag">Java</span>
@@ -1405,8 +1455,8 @@
     </div>
 
     <div class="skill-card reveal" style="transition-delay:0.5s">
-      <div class="skill-icon">📐</div>
-      <h3>Additional Skills</h3>
+      <div class="skill-icon">PLUS</div>
+      <h3 data-en="Additional Skills" data-id="Keahlian Tambahan">Additional Skills</h3>
       <div class="skill-tags">
         <span class="skill-tag">Project Management</span>
         <span class="skill-tag">Prompt Engineering</span>
@@ -1422,17 +1472,17 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">— 03 Projects</div>
-  <h2 class="section-title reveal">Portfolio &<br>Projects</h2>
-  <p class="section-sub reveal">Projects I have worked on, developed, and maintained from start to completion.</p>
+  <div class="section-label" data-en="- 03 Projects" data-id="- 03 Proyek">- 03 Projects</div>
+  <h2 class="section-title reveal" data-en="Portfolio &amp;&lt;br&gt;Projects" data-id="Portofolio &amp;&lt;br&gt;Proyek">Portfolio &<br>Projects</h2>
+  <p class="section-sub reveal" data-en="Projects I have worked on, developed, and maintained from start to completion." data-id="Proyek yang pernah saya kerjakan, kembangkan, dan pelihara dari awal hingga selesai.">Projects I have worked on, developed, and maintained from start to completion.</p>
 
   <div class="projects-list">
 
     <div class="project-item reveal">
       <div class="project-num">01</div>
       <div class="project-info">
-        <h3>SMK Asy-Syamsuriyyah School Website</h3>
-        <p>Jan 2024 – Jul 2024 · Website · Maintenance & Development</p>
+        <h3 data-en="SMK Asy-Syamsuriyyah School Website" data-id="Website SMK Asy-Syamsuriyyah">SMK Asy-Syamsuriyyah School Website</h3>
+        <p data-en="Jan 2024 - Jul 2024 · Website · Maintenance & Development" data-id="Jan 2024 - Jul 2024 · Website · Maintenance & Development">Jan 2024 - Jul 2024 · Website · Maintenance & Development</p>
       </div>
       <span class="project-type type-web">Website</span>
     </div>
@@ -1441,7 +1491,7 @@
       <div class="project-num">02</div>
       <div class="project-info">
         <h3>SiBatikGal</h3>
-        <p>Jul 2024 – Jan 2025 · Digital Batik Platform · Tegal</p>
+        <p data-en="Jul 2024 - Jan 2025 · Digital Batik Platform · Tegal" data-id="Jul 2024 - Jan 2025 · Platform Batik Digital · Tegal">Jul 2024 - Jan 2025 · Digital Batik Platform · Tegal</p>
       </div>
       <span class="project-type type-web">Website</span>
     </div>
@@ -1450,7 +1500,7 @@
       <div class="project-num">03</div>
       <div class="project-info">
         <h3>Therapalsy</h3>
-        <p>Jan 2025 – Jul 2025 · Digital Therapy Application</p>
+        <p data-en="Jan 2025 - Jul 2025 · Digital Therapy Application" data-id="Jan 2025 - Jul 2025 · Aplikasi Terapi Digital">Jan 2025 - Jul 2025 · Digital Therapy Application</p>
       </div>
       <span class="project-type type-app">App</span>
     </div>
@@ -1459,7 +1509,7 @@
       <div class="project-num">04</div>
       <div class="project-info">
         <h3>Fintech App</h3>
-        <p>Jul 2025 – Aug 2025 · Digital Finance Application</p>
+        <p data-en="Jul 2025 - Aug 2025 · Digital Finance Application" data-id="Jul 2025 - Agu 2025 · Aplikasi Keuangan Digital">Jul 2025 - Aug 2025 · Digital Finance Application</p>
       </div>
       <span class="project-type type-app">App</span>
     </div>
@@ -1468,7 +1518,7 @@
       <div class="project-num">05</div>
       <div class="project-info">
         <h3>MirotaKlik</h3>
-        <p>Aug 2025 – Oct 2025 · Platform E-Commerce</p>
+        <p data-en="Aug 2025 - Oct 2025 · E-Commerce Platform" data-id="Agu 2025 - Okt 2025 · Platform E-Commerce">Aug 2025 - Oct 2025 · E-Commerce Platform</p>
       </div>
       <span class="project-type type-app">App</span>
     </div>
@@ -1477,7 +1527,7 @@
       <div class="project-num">06</div>
       <div class="project-info">
         <h3>SUMU App</h3>
-        <p>Oct 2025 – Nov 2025 · Mobile Utility Application</p>
+        <p data-en="Oct 2025 - Nov 2025 · Mobile Utility Application" data-id="Okt 2025 - Nov 2025 · Aplikasi Utilitas Mobile">Oct 2025 - Nov 2025 · Mobile Utility Application</p>
       </div>
       <span class="project-type type-app">App</span>
     </div>
@@ -1489,9 +1539,9 @@
 
 <!-- CERTIFICATES -->
 <section id="certificates">
-  <div class="section-label">— 04 Certificates</div>
-  <h2 class="section-title reveal">Professional<br>Certifications</h2>
-  <p class="section-sub reveal">Dicoding, Huawei, and Wesclic internship certifications that reflect my continued growth across several technology fields.</p>
+  <div class="section-label" data-en="- 04 Certificates" data-id="- 04 Sertifikat">- 04 Certificates</div>
+  <h2 class="section-title reveal" data-en="Professional&lt;br&gt;Certifications" data-id="Sertifikasi&lt;br&gt;Profesional">Professional<br>Certifications</h2>
+  <p class="section-sub reveal" data-en="Dicoding, Huawei, and Wesclic internship certifications that reflect my continued growth across several technology fields." data-id="Sertifikasi Dicoding, Huawei, dan magang Wesclic yang menunjukkan perkembangan saya di berbagai bidang teknologi.">Dicoding, Huawei, and Wesclic internship certifications that reflect my continued growth across several technology fields.</p>
 
   <div class="cert-tabs reveal" role="tablist" aria-label="Certificate category">
     <button class="cert-tab active" type="button" data-cert-target="dicoding" role="tab" aria-selected="true">Dicoding</button>
@@ -1545,10 +1595,10 @@
 <section id="contact" style="max-width:1200px;">
   <div class="contact-wrapper">
     <div class="contact-left reveal">
-      <div class="section-label">— 05 Contact</div>
-      <h2>Let's<br><em>connect</em> &<br>collaborate.</h2>
-      <p>Interested in collaborating or simply getting in touch? I am always open to new conversations, work opportunities, and meaningful projects.</p>
-      <a href="mailto:nurzilah.hyt@gmail.com" class="btn btn-primary">Send Email ↗</a>
+      <div class="section-label" data-en="- 05 Contact" data-id="- 05 Kontak">- 05 Contact</div>
+      <h2 data-en="Let's&lt;br&gt;&lt;em&gt;connect&lt;/em&gt; &amp;&lt;br&gt;collaborate." data-id="Mari&lt;br&gt;&lt;em&gt;terhubung&lt;/em&gt; &amp;&lt;br&gt;berkolaborasi.">Let's<br><em>connect</em> &<br>collaborate.</h2>
+      <p data-en="Interested in collaborating or simply getting in touch? I am always open to new conversations, work opportunities, and meaningful projects." data-id="Tertarik berkolaborasi atau sekadar ingin terhubung? Saya terbuka untuk percakapan baru, peluang kerja, dan proyek yang bermakna.">Interested in collaborating or simply getting in touch? I am always open to new conversations, work opportunities, and meaningful projects.</p>
+      <a href="mailto:nurzilah.hyt@gmail.com" class="btn btn-primary" data-en="Send Email" data-id="Kirim Email">Send Email</a>
     </div>
 
     <div class="contact-links reveal" style="transition-delay:0.2s">
@@ -1564,7 +1614,7 @@
           <div class="contact-link-label">LinkedIn</div>
           <div class="contact-link-value">Nurzilah Hidayati</div>
         </div>
-        <span class="contact-arrow">→</span>
+        <span class="contact-arrow">-&gt;</span>
       </a>
 
       <a href="https://instagram.com/n.rzilaaa" target="_blank" class="contact-link">
@@ -1579,7 +1629,7 @@
           <div class="contact-link-label">Instagram</div>
           <div class="contact-link-value">@n.rzilaaa</div>
         </div>
-        <span class="contact-arrow">→</span>
+        <span class="contact-arrow">-&gt;</span>
       </a>
 
       <a href="https://www.facebook.com/nurzilah.hidayati.5" target="_blank" rel="noopener" class="contact-link">
@@ -1592,7 +1642,7 @@
           <div class="contact-link-label">Facebook</div>
           <div class="contact-link-value">facebook.com/nurzilah.hidayati.5</div>
         </div>
-        <span class="contact-arrow">→</span>
+        <span class="contact-arrow">-&gt;</span>
       </a>
 
       <a href="https://github.com/nurzilah/" target="_blank" rel="noopener" class="contact-link">
@@ -1605,7 +1655,7 @@
           <div class="contact-link-label">GitHub</div>
           <div class="contact-link-value">github.com/nurzilah</div>
         </div>
-        <span class="contact-arrow">→</span>
+        <span class="contact-arrow">-&gt;</span>
       </a>
 
       <a href="mailto:nurzilah.hyt@gmail.com" class="contact-link">
@@ -1619,7 +1669,7 @@
           <div class="contact-link-label">Email</div>
           <div class="contact-link-value">nurzilah.hyt@gmail.com</div>
         </div>
-        <span class="contact-arrow">→</span>
+        <span class="contact-arrow">-&gt;</span>
       </a>
 
       <div class="contact-link" style="cursor:default;">
@@ -1630,8 +1680,8 @@
           </svg>
         </div>
         <div class="contact-link-info">
-          <div class="contact-link-label">Location</div>
-          <div class="contact-link-value">Tegal, Central Java, Indonesia</div>
+          <div class="contact-link-label" data-en="Location" data-id="Lokasi">Location</div>
+          <div class="contact-link-value" data-en="Tegal, Central Java, Indonesia" data-id="Tegal, Jawa Tengah, Indonesia">Tegal, Central Java, Indonesia</div>
         </div>
       </div>
     </div>
@@ -1641,7 +1691,7 @@
 <!-- FOOTER -->
 <footer>
   <p>© 2026 <span class="footer-name">Nurzilah Hidayati</span></p>
-  <p>Built with passion · Tegal, Indonesia ✦</p>
+  <p data-en="Built with passion · Tegal, Indonesia" data-id="Dibuat dengan sepenuh hati · Tegal, Indonesia">Built with passion · Tegal, Indonesia</p>
 </footer>
 
 <script>
@@ -1664,6 +1714,29 @@
   const certLimit = 3;
   let activeCertType = 'dicoding';
   let certExpanded = false;
+  const langButtons = document.querySelectorAll('[data-lang-option]');
+  let currentLang = localStorage.getItem('portfolioLang') || 'en';
+
+  function updateLanguage(lang) {
+    currentLang = lang === 'id' ? 'id' : 'en';
+    document.documentElement.lang = currentLang;
+    localStorage.setItem('portfolioLang', currentLang);
+
+    document.querySelectorAll('[data-en][data-id]').forEach(el => {
+      el.innerHTML = el.dataset[currentLang];
+    });
+
+    langButtons.forEach(button => {
+      const active = button.dataset.langOption === currentLang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+
+    certItems.forEach(item => item.setAttribute('data-badge', currentLang === 'id' ? 'Buka' : 'Full page'));
+    document.querySelectorAll('.cert-status').forEach(status => {
+      status.textContent = currentLang === 'id' ? 'Buka halaman' : 'Open full page';
+    });
+  }
 
   function getCertGroup(item) {
     const href = item.getAttribute('href') || '';
@@ -1696,8 +1769,17 @@
 
     const hasMore = totalCount > certLimit;
     certSeeMore.parentElement.hidden = !hasMore;
-    certSeeMore.textContent = certExpanded ? 'Show Less' : 'See More';
+    certSeeMore.textContent = certExpanded
+      ? (currentLang === 'id' ? 'Tampilkan Lebih Sedikit' : 'Show Less')
+      : (currentLang === 'id' ? 'Lihat Lainnya' : 'See More');
   }
+
+  langButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      updateLanguage(button.dataset.langOption);
+      showCertificates(activeCertType);
+    });
+  });
 
   certTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -1711,6 +1793,7 @@
     showCertificates(activeCertType);
   });
 
+  updateLanguage(currentLang);
   showCertificates('dicoding');
 
   // Nav active state
